@@ -1,62 +1,60 @@
 # botwaa
 
-Arsip bot WhatsApp **alveeria** dari tahun **2020**, berbasis Node.js dan Baileys generasi lama.
+Bot WhatsApp lama punya alveeria, dibuat pakai Node.js dan Baileys. Dulu dijalankan lewat Termux.
 
-> **Tidak dipelihara.** Disimpan untuk dokumentasi dan pembelajaran, bukan bot siap produksi. Dependency memiliki temuan keamanan; protokol WhatsApp dan endpoint pihak ketiga mungkin sudah tidak kompatibel. Jangan gunakan akun WhatsApp utama. Bot tidak resmi ini tidak berafiliasi dengan WhatsApp dan penggunaannya dapat berisiko terhadap akun.
+Ini arsip dari 2020, udah nggak diurus. Banyak API dan dependency-nya juga udah lama, jadi jangan berharap semua fitur masih jalan.
 
-## Isi arsip
+## Fitur
 
-Kode mencakup perintah sticker, pantun, pencarian gambar, Quran, Wikipedia, balasan teks, serta tautan downloader. Sebagian fitur lama dikomentari atau bergantung pada layanan eksternal. Keberhasilan fitur saat ini tidak dijamin.
+- Bikin sticker dari gambar
+- Pantun dan gambar random
+- Ayat Quran dan Wikipedia
+- Balasan teks
+- Link download YouTube, Instagram, Facebook, dan Twitter
 
-## Konfigurasi
+Sebagian fitur bergantung ke API pihak ketiga. Fitur quotes dan beberapa percobaan lain masih ada di kode, tapi dikomentari.
 
-Konfigurasi nama bot ada di awal `index.js`. Instagram, nomor kontak/donasi, dan tautan grup sengaja dikosongkan. Jangan commit informasi pribadi atau kredensial ke repository.
-
-API key bawaan sudah dihapus dari versi kode terbaru. Jika layanan terkait masih tersedia, sediakan sendiri lewat environment variable:
-
-- `FARZAIN_API_KEY`
-- `MHANKBARBAR_API_KEY`
-- `SOUNDCLOUD_CLIENT_ID` (hanya referensi kode lama yang dikomentari)
-
-Salin `.env.example` menjadi `.env`, lalu isi key yang diperlukan. Semua nilai template sengaja dikosongkan; `.env` diabaikan oleh Git.
+## Kalau mau ngoprek
 
 ```bash
+git clone https://github.com/alveeria/botwaa.git
+cd botwaa
 cp .env.example .env
 ```
 
-File `.env` tidak otomatis dimuat oleh kode lama ini. Pada Node.js 20.6+ dapat dimuat saat menjalankan bot:
+Nama bot, kontak, Instagram, dan link grup bisa diubah di bagian atas `index.js`. Kontak dan link bawaan udah dikosongin.
+
+Isi `.env` kalau butuh API key:
+
+```env
+FARZAIN_API_KEY=
+MHANKBARBAR_API_KEY=
+SOUNDCLOUD_CLIENT_ID=
+```
+
+SoundCloud cuma dipakai di kode yang dikomentari. `.env` nggak otomatis dibaca; kalau pakai Node.js 20.6 ke atas, jalankan dengan:
 
 ```bash
 node --env-file=.env index.js
 ```
 
-Alternatifnya, gunakan environment shell atau pengelola proses. Dukungan flag tersebut tidak menjamin dependency bot lama kompatibel dengan Node.js modern.
+Kalau environment variable udah diatur lewat shell, cukup `npm start`.
 
-## Referensi instalasi lama
+Dependency ada di `package.json`. Skrip `install.sh` masih bawaan Termux dulu, cek dulu sebelum dijalankan. Instalasi dan login bot ini belum dites ulang di versi Node.js sekarang.
 
-```bash
-git clone https://github.com/alveeria/botwaa.git
-cd botwaa
-```
+## Catatan
 
-`install.sh` adalah skrip historis untuk Termux. Tinjau sebelum menjalankan: skrip memasang paket global dan dependency lama, serta bukan prosedur instalasi yang telah diuji untuk sistem sekarang.
-
-Entrypoint bot adalah `index.js` (`npm start`), yang akan mencoba menghubungkan akun WhatsApp. Kredensial tersimpan di `session.json`; jangan bagikan file ini maupun QR login. Pesan dan nomor pengirim dicetak ke terminal oleh kode lama.
-
-## Pemeriksaan
-
-```bash
-npm test
-```
-
-Perintah ini hanya memeriksa sintaks JavaScript, tidak menjalankan bot atau membuktikan fiturnya masih bekerja. Tidak ada modernisasi dependency pada pembaruan arsip ini.
+- Dependency lama punya temuan keamanan. Jangan langsung dipakai buat bot publik.
+- Jangan pakai nomor WhatsApp utama; bot tidak resmi bisa berisiko kena pembatasan akun.
+- Jangan bagikan QR login atau `session.json`. File itu berisi akses sesi WhatsApp.
+- Kode lama masih mencetak nomor pengirim dan isi pesan ke terminal.
+- `.env` dan session udah masuk `.gitignore`.
+- `npm test` cuma cek sintaks, bukan ngetes koneksi atau fitur bot.
 
 ## Kredit
 
-Dikelola sebagai arsip oleh [alveeria](https://github.com/alveeria).
-
-Kode historis berasal dari proyek [botst4rz](https://github.com/Bintang73/botst4rz) oleh Bintang Nur Pradana dan [termux-whatsapp-bot](https://github.com/fdciabdul/termux-whatsapp-bot) oleh Abdul Muttaqin / fdciabdul. Kredit sumber asli tetap dipertahankan.
+Berawal dari [botst4rz](https://github.com/Bintang73/botst4rz) oleh Bintang Nur Pradana dan [termux-whatsapp-bot](https://github.com/fdciabdul/termux-whatsapp-bot) oleh Abdul Muttaqin / fdciabdul.
 
 ## Lisensi
 
-File [LICENSE](LICENSE) bawaan arsip berisi **Unlicense**; metadata paket diselaraskan dengan file tersebut. Lisensi dependency dan materi pihak ketiga tetap mengikuti ketentuan masing-masing.
+[Unlicense](LICENSE).
