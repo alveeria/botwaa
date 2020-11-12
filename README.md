@@ -18,7 +18,19 @@ API key bawaan sudah dihapus dari versi kode terbaru. Jika layanan terkait masih
 - `MHANKBARBAR_API_KEY`
 - `SOUNDCLOUD_CLIENT_ID` (hanya referensi kode lama yang dikomentari)
 
-File `.env` tidak otomatis dimuat oleh kode ini. Gunakan environment shell atau pengelola proses.
+Salin `.env.example` menjadi `.env`, lalu isi key yang diperlukan. Semua nilai template sengaja dikosongkan; `.env` diabaikan oleh Git.
+
+```bash
+cp .env.example .env
+```
+
+File `.env` tidak otomatis dimuat oleh kode lama ini. Pada Node.js 20.6+ dapat dimuat saat menjalankan bot:
+
+```bash
+node --env-file=.env index.js
+```
+
+Alternatifnya, gunakan environment shell atau pengelola proses. Dukungan flag tersebut tidak menjamin dependency bot lama kompatibel dengan Node.js modern.
 
 ## Referensi instalasi lama
 
