@@ -12,12 +12,12 @@ const menu = require("./lib/menu.js");
 const donate = require("./lib/donate.js");
 const info = require("./lib/info.js");
 //
-const BotName = 'CHELL-BOT'; // Nama Bot Whatsapp
-const instagramlu = 'https://instagram.com/firdaus404_'; // Nama Instagramlu cok
-const whatsapplu = '0831-6643-9105'; // Nomor whatsapplu cok
-const kapanbotaktif = 'Kalo yang punya on'; // Kapan bot lu aktif
-const grupch1 = 'https://chat.whatsapp.com/JQsXBXjQ8H86nk4uswt0Ea'; // OFFICIAL GRUP LU 1
-const grupch2 = 'SATU DOANG'; // OFFICIAL GRUP LU 2
+const BotName = 'alveeria'; // Nama bot
+const instagramlu = ''; // Opsional: URL Instagram
+const whatsapplu = ''; // Opsional: nomor kontak/donasi
+const kapanbotaktif = 'Kalo yang punya on'; // Kapan bot aktif
+const grupch1 = ''; // Opsional: URL grup pertama
+const grupch2 = ''; // Opsional: URL grup kedua
 //
 const
 {
@@ -63,11 +63,11 @@ fs.existsSync('./session.json') && conn.loadAuthInfo('./session.json')
 //conn.connectOptions.agent = ProxyAgent ('http://1.0.180.120:8080')
 conn.connect();
 
-conn.on('user-presence-update', json => console.log(`[ ${moment().format("HH:mm:ss")} ] => bot by @bintang_nur_pradana`))
+conn.on('user-presence-update', json => console.log(`[ ${moment().format("HH:mm:ss")} ] => bot by alveeria`))
 conn.on('message-status-update', json =>
 {
    const participant = json.participant ? ' (' + json.participant + ')' : '' // participant exists when the message is from a group
-   console.log(`[ ${moment().format("HH:mm:ss")} ] => bot by Root@firdaus404_`)
+   console.log(`[ ${moment().format("HH:mm:ss")} ] => bot by alveeria`)
 })
 
 conn.on('message-new', async(m) =>
@@ -113,7 +113,7 @@ conn.sendMessage(id ,`${gg} ${exists ? " exists " : " does not exist"} on WhatsA
 
 if (text.includes("#tts")){
 const teks = text.replace(/#tts /, "")
-const gtts = (`https://rest.farzain.com/api/tts.php?id=${teks}&apikey=O8mUD3YrHIy9KM1fMRjamw8eg`)
+const gtts = (`https://rest.farzain.com/api/tts.php?id=${teks}&apikey=${process.env.FARZAIN_API_KEY || ''}`)
     conn.sendMessage(id, gtts ,MessageType.text);
 }
 
@@ -148,7 +148,7 @@ axios.get(`http://scrap.terhambar.com/yt?link=${teks}`).then((res) => {
 
 if (text.includes("#fb")){
 const teks = text.replace(/#fb /, "")
-axios.get(`https://mhankbarbar.herokuapp.com/api/epbe?url=${teks}&apiKey=zFuV88pxcIiCWuYlwg57`).then((res) => {
+axios.get(`https://mhankbarbar.herokuapp.com/api/epbe?url=${teks}&apiKey=${process.env.MHANKBARBAR_API_KEY || ''}`).then((res) => {
     let hasil = `Download sendiri melalui link dibawah ya, takut servernya down xixi..\n\nJudul: ${res.data.title}\n\nSize: ${res.data.filesize}\n\nLink: ${res.data.result}`;
     conn.sendMessage(id, hasil ,MessageType.text);
 })
@@ -164,7 +164,7 @@ axios.get(`https://st4rz.herokuapp.com/api/ig?url=${teks}`).then((res) => {
 
 if (text.includes("#twt")){
 const teks = text.replace(/#twt /, "")
-axios.get(`https://mhankbarbar.herokuapp.com/api/twit?url=${teks}&apiKey=zFuV88pxcIiCWuYlwg57`).then((res) => {
+axios.get(`https://mhankbarbar.herokuapp.com/api/twit?url=${teks}&apiKey=${process.env.MHANKBARBAR_API_KEY || ''}`).then((res) => {
     let hasil = `Download sendiri melalui link dibawah ya, takut servernya down xixi..\n\nJudul: ${res.data.title}\n\nSize: ${res.data.filesize}\n\nLink: ${res.data.result}`;
     conn.sendMessage(id, hasil ,MessageType.text);
 })
@@ -754,7 +754,7 @@ if (text.includes("#randomanime"))
 /*if (text.includes("#scdl")){
 const fs = require("fs");
 const scdl = require("./lib/scdl");
-scdl.setClientID("iZIs9mchVcX5lhVRyQGGAYlNPVldzAoX");
+scdl.setClientID(process.env.SOUNDCLOUD_CLIENT_ID || '');
 scdl("https://m.soundcloud.com/abdul-muttaqin-701361735/lucid-dreams-gustixa-ft-vict-molina")
     .pipe(fs.createWriteStream("mp3/song.mp3"));
 }

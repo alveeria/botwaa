@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+session.json
+session*.json
+auth_info*.json
+auth_info*/
+sessions/
+*.log
+npm-debug.log*
+temp/*
+!temp/index

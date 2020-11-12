@@ -1,7 +1,7 @@
 {
-  "name": "st4rzbot",
+  "name": "botwaa",
   "version": "1.0.0",
-  "description": "bot whatsapp lewat hp doang",
+  "description": "Arsip bot WhatsApp alveeria (2020), tidak dipelihara",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -25,19 +25,20 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node index"
+    "start": "node index.js",
+    "test": "node --check index.js && node --check lib/cmd.js && node --check lib/donate.js && node --check lib/downloadImage.js && node --check lib/info.js && node --check lib/menu.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bintang73/botst4rz.git"
+    "url": "git+https://github.com/alveeria/botwaa.git"
   },
   "keywords": [
     "k"
   ],
-  "author": "Abdul Muttaqin",
-  "license": "ISC",
+  "author": "alveeria",
+  "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/Bintang73/botst4rz/issues"
+    "url": "https://github.com/alveeria/botwaa/issues"
   },
-  "homepage": "https://github.com/Bintang73/botst4rz#readme"
+  "homepage": "https://github.com/alveeria/botwaa#readme"
 }
